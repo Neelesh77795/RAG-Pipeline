@@ -89,3 +89,39 @@ def main(pdf_path, query):
     context = " ".join(relevant_chunks)  # Combine relevant chunks for context
     response = generate_response(query, context)
     return response
+    ---------------------------------------------------------------------------------
+    import fitz  # PyMuPDF
+
+# Function to extract text from a PDF
+def extract_text_from_pdf(pdf_path):
+    doc = fitz.open(pdf_path)
+    text = ""
+     for page_num in range(doc.page_count):
+        page = doc.load_page(page_num)
+        text += page.get_text()
+    return text
+
+# Function to process the PDF and generate a response
+def main(pdf_path, query):
+    # Step 1: Extract and process PDF text
+    text = extract_text_from_pdf(pdf_path)  # Extract text from PDF
+    print("Extracted Text:")
+    print(text[:500])  # Print the first 500 characters of extracted text
+     # Example processing steps (these need to be defined as per your code):
+    # chunks = chunk_text(text)
+    # embeddings = embed_text(chunks)
+    # index = store_embeddings_in_faiss(embeddings)
+     # Example of generating a response (replace with actual logic)
+    response = "This is a sample response based on the extracted text."
+    return response
+
+# Define the PDF file path and user query
+pdf_path = "/Users/neeleshsuragani/Desktop/task 1/UNIT IV 2024-2025.pdf"  # Corrected path
+query = "What is the main topic of the document?"
+
+# Call the main function to process the PDF and generate a response
+response = main(pdf_path, query)
+
+# Print the response
+print("Generated Response:")
+print(response)
